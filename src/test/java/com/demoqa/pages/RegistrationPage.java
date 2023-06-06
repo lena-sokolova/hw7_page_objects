@@ -18,7 +18,15 @@ public class RegistrationPage {
         userEmailInput = $("#userEmail"),
         genderWrapper = $("#genterWrapper"),
         userNumberInput = $("#userNumber"),
-        birthDayInput = $("#dateOfBirthInput");
+        birthDayInput = $("#dateOfBirthInput"),
+        subjectInput = $("#subjectsInput"),
+        hobbiesWrapper = $("#hobbiesWrapper"),
+        uploadFileBtn = $("#uploadPicture"),
+        currentAddressInput = $("#currentAddress"),
+        state = $("#state"),
+        stateCityWrapper = $("#stateCity-wrapper"),
+        city = $("#city"),
+        submitBtn = $("#submit");
 
     public RegistrationPage openPage () {
         open ("/automation-practice-form");
@@ -62,6 +70,51 @@ public class RegistrationPage {
     public RegistrationPage setBirthDay (String day, String month, String year) {
         birthDayInput.click();
         calendarComponent.setDate(day, month, year);
+
+        return this;
+    }
+
+    public RegistrationPage setSubject (String value) {
+        subjectInput.setValue(value).pressEnter();
+
+        return this;
+    }
+
+    public RegistrationPage setHobby (String value) {
+        hobbiesWrapper.$(byText(value)).click();;
+
+        return this;
+    }
+
+    public RegistrationPage uploadPicture (String value) {
+        uploadFileBtn.uploadFromClasspath(value);
+        ;
+
+        return this;
+    }
+
+    public RegistrationPage setCurrentAddress (String value) {
+        currentAddressInput.setValue(value);
+
+        return this;
+    }
+
+    public RegistrationPage setState (String value) {
+        state.click();
+        stateCityWrapper.$(byText(value)).click();
+
+        return this;
+    }
+
+    public RegistrationPage setCity (String value) {
+        city.click();
+        city.$(byText(value)).click();
+
+        return this;
+    }
+
+    public RegistrationPage clickSubmitBtn() {
+        submitBtn.click();
 
         return this;
     }

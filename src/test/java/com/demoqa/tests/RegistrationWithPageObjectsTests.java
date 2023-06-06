@@ -16,24 +16,20 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     @Test
     void successfulRegistrationTest() {
         registrationPage.openPage()
-            .setFirstName("Elena")
-            .setLastName("Sokolova")
-            .setUserEmail("e.sokolova@example.com")
-            .setGender("Female")
-            .setUserNumber("1234567890")
-            .setBirthDay("07", "July", "1989");
+                .setFirstName("Elena")
+                .setLastName("Sokolova")
+                .setUserEmail("e.sokolova@example.com")
+                .setGender("Female")
+                .setUserNumber("1234567890")
+                .setBirthDay("07", "July", "1989")
+                .setSubject("English")
+                .setHobby("Sports")
+                .uploadPicture("nature.jpg")
+                .setCurrentAddress("Some address")
+                .setState("Rajasthan")
+                .setCity("Jaipur")
+                .clickSubmitBtn();
 
-
-
-        $("#subjectsInput").setValue("English").pressEnter();
-        $("#hobbiesWrapper").$(byText("Sports")).click();
-        $("#uploadPicture").uploadFromClasspath("nature.jpg");
-        $("#currentAddress").setValue("Some address");
-        $("#state").click();
-        $("#stateCity-wrapper").$(byText("Rajasthan")).click();
-        $("#city").click();
-        $("#city").$(byText("Jaipur")).click();
-        $("#submit").click();
 
 
         $(".modal-dialog").should(appear);
