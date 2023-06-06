@@ -1,13 +1,8 @@
 package com.demoqa.tests;
 
 import com.demoqa.pages.RegistrationPage;
-import com.demoqa.pages.components.CalendarComponent;
-import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import org.junit.jupiter.api.Test;
 
 public class RegistrationWithPageObjectsTests extends TestBase {
 
@@ -30,12 +25,18 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                 .setCity("Jaipur")
                 .clickSubmitBtn();
 
-
-
-        $(".modal-dialog").should(appear);
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Elena"), text("Sokolova"),
-                text("e.sokolova@example.com"), text("1234567890"));
+        registrationPage
+                .checkResult("Student Name","Elena Sokolova")
+                .checkResult("Student Email", "e.sokolova@example.com")
+                .checkResult("Gender", "Female")
+                .checkResult("Mobile", "1234567890")
+                .checkResult("Date of Birth", "07 July,1989")
+                .checkResult("Subjects", "English")
+                .checkResult("Hobbies", "Sports")
+                .checkResult("Picture", "nature.jpg")
+                .checkResult("Address", "Some address")
+                .checkResult("State and City", "Rajasthan Jaipur")
+                .closeTableResponsive();
 
     }
 }

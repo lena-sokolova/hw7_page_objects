@@ -2,6 +2,7 @@ package com.demoqa.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import com.demoqa.pages.components.CalendarComponent;
+import com.demoqa.pages.components.RegistrationResultComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -119,4 +120,18 @@ public class RegistrationPage {
         return this;
     }
 
+    public RegistrationPage checkResult(String key, String value) {
+        RegistrationResultComponent.verifyResult(key, value);
+
+        return this;
+    }
+
+    public RegistrationPage closeTableResponsive() {
+        RegistrationResultComponent.clickCloseBtn();
+
+        return this;
+    }
 }
+
+
+
