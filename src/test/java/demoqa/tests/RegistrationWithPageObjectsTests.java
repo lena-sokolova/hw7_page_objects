@@ -1,7 +1,7 @@
-package com.demoqa;
+package demoqa.tests;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+import com.codeborne.selenide.SelenideElement;
+import demoqa.pages.RegistrationPage;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.appear;
@@ -9,19 +9,19 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationTests extends TestBase {
+public class RegistrationWithPageObjectsTests extends TestBase {
+
+    RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     void successfulRegistrationTest() {
-        open ("/automation-practice-form");
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        executeJavaScript("$('footer').remove()");
-        executeJavaScript("$('#fixedban').remove()");
+        registrationPage.openPage()
+            .setFirstName("Elena")
+            .setLastName("Sokolova")
+            .setUserEmail("e.sokolova@example.com")
+            .setGender("Female");
 
-        $("#firstName").setValue("Elena");
-        $("#lastName").setValue("Sokolova");
-        $("#userEmail").setValue("e.sokolova@example.com");
-        $("#genterWrapper").$(byText("Female")).click();
+
         $("#userNumber").setValue("1234567890");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption("July");
