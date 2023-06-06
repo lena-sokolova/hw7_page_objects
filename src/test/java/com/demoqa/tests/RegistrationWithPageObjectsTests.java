@@ -1,7 +1,6 @@
-package demoqa.tests;
+package com.demoqa.tests;
 
-import com.codeborne.selenide.SelenideElement;
-import demoqa.pages.RegistrationPage;
+import com.demoqa.pages.RegistrationPage;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.appear;
