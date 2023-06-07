@@ -11,6 +11,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
     @Test
     void successfulRegistrationTest() {
         registrationPage.openPage()
+                .closeBanners()
                 .setFirstName("Elena")
                 .setLastName("Sokolova")
                 .setUserEmail("e.sokolova@example.com")
@@ -26,6 +27,7 @@ public class RegistrationWithPageObjectsTests extends TestBase {
                 .clickSubmitBtn();
 
         registrationPage
+                .checkModalDialogVisible()
                 .checkResult("Student Name","Elena Sokolova")
                 .checkResult("Student Email", "e.sokolova@example.com")
                 .checkResult("Gender", "Female")

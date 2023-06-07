@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.demoqa.pages.components.CalendarComponent;
 import com.demoqa.pages.components.RegistrationResultComponent;
 
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -11,9 +12,14 @@ import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
 
+    String formTitle = "Student Registration Form";
+    String successRegistrationFormText = "Thanks for submitting the form";
+
+
     CalendarComponent calendarComponent = new CalendarComponent();
 
     SelenideElement
+        practiceFormWrapper = $(".practice-form-wrapper"),
         firstNameInput = $("#firstName"),
         lastNameInput = $("#lastName"),
         userEmailInput = $("#userEmail"),
@@ -27,14 +33,20 @@ public class RegistrationPage {
         state = $("#state"),
         stateCityWrapper = $("#stateCity-wrapper"),
         city = $("#city"),
-        submitBtn = $("#submit");
+        submitBtn = $("#submit"),
+        modalDialog = $(".modal-dialog"),
+        modalDialogTitle = $("#example-modal-sizes-title-lg");
 
     public RegistrationPage openPage () {
         open ("/automation-practice-form");
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        executeJavaScript("$('footer').remove()");
-        executeJavaScript("$('#fixedban').remove()");
+        practiceFormWrapper.shouldHave(text(formTitle));
 
+        return this;
+    }
+
+    public RegistrationPage closeBanners() {
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
         return this;
     }
 
@@ -116,6 +128,13 @@ public class RegistrationPage {
 
     public RegistrationPage clickSubmitBtn() {
         submitBtn.click();
+
+        return this;
+    }
+
+    public RegistrationPage checkModalDialogVisible() {
+        modalDialog.should(appear);
+        modalDialogTitle.shouldHave(text(successRegistrationFormText));
 
         return this;
     }
